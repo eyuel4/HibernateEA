@@ -8,7 +8,7 @@
 		<property name="hibernate.connection.url">jdbc:mysql://localhost/cs544</property>
 		<property name="hibernate.connection.driver_class">com.mysql.jdbc.Driver</property>
 	    <property name="hibernate.connection.username">root</property>
-        <property name="hibernate.connection.password">root</property>
+        <property name="hibernate.connection.password">205364eyuheb</property>
 	
 			<!-- Use the Hibernate built-in pool for tests. -->
 		<property name="hibernate.connection.pool_size">1</property>
@@ -28,6 +28,9 @@
 		<mapping class="com.fenast.EA.model.Publisher"/>  
 		<mapping class="com.fenast.EA.model.Student"/>
 	    <mapping class="com.fenast.EA.model.Course"/>
+	    <mapping class="com.fenast.EA.model.Reservation"/>
+	    <mapping class="com.fenast.EA.model.Customer"/>
+	    <mapping class="com.fenast.EA.model.Office"/>
 	</session-factory>
 
 </hibernate-configuration> 

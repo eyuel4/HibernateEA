@@ -1,6 +1,7 @@
 package com.fenast.EA.controller;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import org.hibernate.HibernateException;
@@ -11,9 +12,12 @@ import org.hibernate.cfg.Configuration;
 
 import com.fenast.EA.model.Book;
 import com.fenast.EA.model.Course;
+import com.fenast.EA.model.Customer;
 import com.fenast.EA.model.Department;
 import com.fenast.EA.model.Employee;
+import com.fenast.EA.model.Office;
 import com.fenast.EA.model.Publisher;
+import com.fenast.EA.model.Reservation;
 import com.fenast.EA.model.Student;
 
 public class Application {
@@ -39,9 +43,9 @@ public class Application {
 			Department department = new Department("Computer Science");
 			
 			List<Employee> employlist = new ArrayList<Employee>();
-			employlist.add(new Employee("Eyuel"));
-			employlist.add(new Employee("John"));
-			employlist.add(new Employee("Tom"));
+			employlist.add(new Employee("Eyuel", new Department("Computer Science"), new Office(200, 5)));
+			employlist.add(new Employee("John", new Department("Law"), new Office(100, 3)));
+			employlist.add(new Employee("Tom", new Department("Maths"), new Office(101,4)));
 
 			department.setEmployees(employlist);
 			//=================== Book =====================
@@ -56,6 +60,14 @@ public class Application {
 			course.add(new Course(454,"WAP"));
 			s1.setCourses(course);
 			
+			//================= Customer =====================
+			Customer c1 = new Customer("Hiab");
+			
+//			List<Reservation> reservations = new ArrayList<Reservation>();
+//			reservations.add(new Reservation("2008-11-11"));
+//			
+//			c1.setReservations(reservations);
+//			
 			session = sessionFactory.openSession();
 			tx = session.beginTransaction();
 			
@@ -66,7 +78,8 @@ public class Application {
 			session.persist(p1);
 			//Save Student 
 			session.persist(s1);
-			
+			//Save Customer
+			session.persist(c1);
 			
 			tx.commit();
 			System.out.println("Over");
@@ -83,11 +96,11 @@ public class Application {
 			session = sessionFactory.openSession();
 			
 			tx = session.beginTransaction();
-			List<Book> books = session.createQuery("from Book b order by b.isbn desc").list();
-			
-			for(Book b : books) {
-				System.out.println(b.getPublisher().getName());
-			}
+//			List<Student> students = session.createQuery("from sutdent s order by s.firstName desc").list();
+//			
+//			for(Student student : students) {
+//				
+//			}
 		} catch(HibernateException e) {
 			System.err.println(e);
 			if(tx != null) tx.rollback();
